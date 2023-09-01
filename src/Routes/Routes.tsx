@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
 import Contact from "../Pages/Contact/Contact";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import CcreateContact from "../Pages/CreateContact/CcreateContact";
 
 const router = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Contact></Contact>,
+            },
+            {
+                path: "/create-contact",
+                element: <CcreateContact></CcreateContact>,
             },
             {
                 path: "/dashboard",
