@@ -93,7 +93,7 @@ const Contact = () => {
                       Last Name
                     </th>
                     <th className="text-dark" scope="col">
-                      Status
+                      Details
                     </th>
                     <th className="text-dark" scope="col">
                       Edit
@@ -109,12 +109,11 @@ const Contact = () => {
                       <th scope="row">{i + 1}</th>
                       <td>{contact.firstName}</td>
                       <td>{contact.lastName}</td>
+                     
                       <td>
-                        <button
-                          className={`pb-3 pt-2 badge capitalize ${contact?.status === "active" ? "badge-success" : "badge-error text-white"}`}
-                        >
-                          {contact.status}
-                        </button>
+                       <Link state={contact} to='/contact-details'> <button className='btn btn-neutral btn-xs rounded-none'>
+                          View Details
+                        </button></Link>
                       </td>
                       <td>
                         <label onClick={() => { setEditContact(contact) }}
