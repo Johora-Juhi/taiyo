@@ -32,16 +32,14 @@ const { data: contacts = [], refetch } = useQuery<Contact[]>({
 });
     
     // delete conatct
-    const [deletingSeller, setDeletingSeller] = useState(null)
-
+    const [deletingSeller, setDeletingSeller] = useState<Contact | null>(null)
     
     const closeModal = () => {
         setDeletingSeller(null);
     }
 
-    const handleDetetingcontact = (contact) => {
-        console.log(contact);
-        fetch(`https://hair-saloon-server.vercel.app/users/${contact._id}`, {
+    const handleDetetingcontact = (id:string) => {
+        fetch(`http://localhost:5000/contact/${id}`, {
           method: "DELETE",
           headers: {
           },
@@ -50,7 +48,8 @@ const { data: contacts = [], refetch } = useQuery<Contact[]>({
           .then((data) => {
             if (data.deletedCount > 0) {
               refetch();
-              Swal.fire({
+                Swal.fire({
+                    position: "center",
                 icon: "success",
                 title: "Contact Removed",
                 showConfirmButton: false,
@@ -121,14 +120,6 @@ const { data: contacts = [], refetch } = useQuery<Contact[]>({
                   </td>
                       <td>
                       <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn btn-xs bg-red-600 text-white">Delete</label>
-
-                    <button
-                      onClick={() => handleDetetingcontact(contact._id)}
-                      type="button"
-                      className="btn btn-sm bg-red-600 text-white py-0"
-                    >
-                      Delete
-                    </button>
                   </td>
                 </tr>
               ))}
@@ -140,7 +131,7 @@ const { data: contacts = [], refetch } = useQuery<Contact[]>({
                 deletingSeller && <ConfirmationModal
                     title={'Are you sure you want to delete'}
                     message={`If you delete ${deletingSeller.firstName}. It can not be done`}
-                    successAction={handleDetetingcontact}
+                    successAction={() =>handleDetetingcontact(deletingSeller._id)}
                     modalData={deletingSeller}
                     successButtonName={'Delete'}
                     closeModal={closeModal}

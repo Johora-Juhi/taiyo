@@ -4,7 +4,7 @@ interface ConfirmationModalProps {
     title: string;
     message: string;
     successButtonName: string;
-    successAction: (modalData: any) => void; // Adjust the type of modalData as needed
+    successAction:  (id: any) => void; // Adjust the type of modalData as needed
     modalData: any; // Adjust the type as needed
     closeModal: () => void;
   }
@@ -17,7 +17,7 @@ const ConfirmationModal = ({title,message,successButtonName,successAction,modalD
                     <h3 className="font-bold text-lg">{title}!</h3>
                     <p className="py-4">{message}!</p>
                     <div className="modal-action">
-                        <label onClick={()=>successAction(modalData)}  htmlFor="confirmation-modal" className="btn">{successButtonName}</label>
+                        <label onClick={()=>successAction(modalData)}  htmlFor="confirmation-modal" className="btn bg-red-600 text-white">{successButtonName}</label>
                         <button onClick={closeModal} className='btn btn-outline'>Close</button>
                     </div>
                 </div>
