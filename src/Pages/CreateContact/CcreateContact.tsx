@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from 'react'
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
     firstName: string;
@@ -9,6 +10,8 @@ interface FormData {
     status: string;
 }
 const CcreateContact = () => {
+    const navigate = useNavigate();
+
     const [contactStatus, setContactStatus] = useState('active');
 
     const {
@@ -23,10 +26,8 @@ const CcreateContact = () => {
         console.log(formStatus);
     }
     const handleContact: SubmitHandler<FormData> = (data) => {
-        // Handle form submission here using the 'data' object
         const conatct = { ...data, status: contactStatus }
-        console.log(data);
-        console.log(conatct);
+        
         fetch("http://localhost:5000/contact", {
             method: "POST",
             headers: {
@@ -41,8 +42,9 @@ const CcreateContact = () => {
                     icon: "success",
                     title: "Successful",
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1000,
                 });
+                navigate("/");
                 setContactStatus('active')
                 reset();
             })
