@@ -151,8 +151,7 @@ const Contact = () => {
           </div>
           :
           <div className='w-2/4 mx-auto bg-gray-50 text-center my-20 py-10 flex justify-around items-center rounded-md border-2 border-dashed'>
-        <TiDelete className='text-5xl text-red-600'></TiDelete>
-           
+            <TiDelete className='text-5xl text-red-600'></TiDelete>
             <p className='text-xl noContact'>No contact found. Please add from create account</p>
 
           </div>
