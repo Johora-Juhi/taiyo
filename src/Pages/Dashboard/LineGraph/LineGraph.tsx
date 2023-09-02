@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import './LineGraph.css'
 
 interface GraphData {
   cases: Record<string, number>;
@@ -21,7 +22,7 @@ const LineGraph = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className=''></div>
   }
 
   // Extract data for cases, deaths, and recovered
@@ -39,8 +40,8 @@ const LineGraph = () => {
   }));
 
   return (
-    <div className='flex flex-col justify-center items-center'>
-      <p className='my-5 text-xl'>COVID-19 Cases, Deaths, and Recovered</p>
+    <div className='flex flex-col justify-center items-center shadow-lg w-3/4 mx-auto my-10 bg-white'>
+      <p className='pt-5 pb-14 text-xl fontFamily tracking-wider'>COVID-19 Cases, Deaths, and Recovered</p>
       <LineChart width={800} height={500} data={chartData}   margin={{
             top: 5,
             right: 30,
@@ -51,7 +52,7 @@ const LineGraph = () => {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        {/* <Legend /> */}
+        <Legend className='py-5' />
         <Line type="monotone" dataKey="cases" stroke="rgba(75, 192, 192, 1)" />
         <Line type="monotone" dataKey="deaths" stroke="rgba(255, 0, 0, 1)" />
         <Line type="monotone" dataKey="recovered" stroke="rgba(0, 128, 0, 1)" />

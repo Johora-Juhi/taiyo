@@ -12,12 +12,18 @@ interface Contact {
     _id: string;
     firstName: string;
     lastName: string;
+    email: string;
+    phone: number;
+    address: string;
     status: string;
 }
 
 interface FormData {
     firstName: string;
     lastName: string;
+    email: string;
+    phone: number;
+    address: string;
     status: string
 }
 
@@ -65,10 +71,10 @@ const EditingContactModal = ({ contact, setEditContact, refetch }: EditingContac
         <div>
             <input type="checkbox" id="contactEditModal" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box">
+                <div className="modal-box w-11/12 max-w-3xl">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => setEditContact(null)}>✕</button>
                     <div className="modal-action">
-                        <form onSubmit={handleSubmit(handleEditContact)} className="">
+                        <form onSubmit={handleSubmit(handleEditContact)} className="px-5">
                             <h1 className="text-3xl text-start text-sky-900 font-bold">
                                 Edit Contact
                             </h1>
@@ -87,9 +93,8 @@ const EditingContactModal = ({ contact, setEditContact, refetch }: EditingContac
                                     defaultValue={contact.firstName}
                                 />
                                 {errors.firstName && (
-                                    <p className="text-red-500">{errors.firstName?.message}</p>
+                                    <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.firstName?.message}</p>
                                 )}
-
                             </div>
 
                             <div className="form-control grid grid-cols-12 my-5">
@@ -106,10 +111,65 @@ const EditingContactModal = ({ contact, setEditContact, refetch }: EditingContac
                                     defaultValue={contact.lastName}
                                 />
                                 {errors.lastName && (
-                                    <p className="text-red-500">{errors.lastName?.message}</p>
+                                    <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.lastName?.message}</p>
                                 )}
                             </div>
 
+                            <div className="form-control grid grid-cols-12 my-5">
+                    <label className="label col-span-3">
+                        <span className="label-text font-semibold">Email:</span>
+                    </label>
+                    <input
+                        {...register("email", {
+                            required: "Email is required",
+                        })}
+                        type="email"
+                        placeholder="Email"
+                                    className="input input-bordered col-span-9"
+                                    defaultValue={contact.email}
+                    />
+                    {errors.email && (
+                        <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.email?.message}</p>
+                    )}
+                </div>
+
+                <div className="form-control grid grid-cols-12 my-5">
+                    <label className="label col-span-3">
+                        <span className="label-text font-semibold">Phone Number:</span>
+                    </label>
+                    <input
+                        {...register("phone", {
+                            required: "Phone Number is required",
+                        })}
+                        type="text"
+                        placeholder="Phone Number"
+                                    className="input input-bordered col-span-9"
+                                    defaultValue={contact.phone}
+
+                    />
+                    {errors.phone && (
+                        <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.phone?.message}</p>
+                    )}
+                </div>
+
+                <div className="form-control grid grid-cols-12 my-5">
+                    <label className="label col-span-3">
+                        <span className="label-text font-semibold">Address:</span>
+                    </label>
+                    <input
+                        {...register("address", {
+                            required: "Adress is required",
+                        })}
+                        type="text"
+                        placeholder="Address"
+                                    className="input input-bordered col-span-9"
+                                    defaultValue={contact.address}
+
+                    />
+                    {errors.address && (
+                        <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.address?.message}</p>
+                    )}
+                </div>
                             <div className="form-control grid grid-cols-12 my-5">
                                 <label className="label col-span-3">
                                     <span className="label-text font-semibold">Status:</span>
@@ -123,11 +183,11 @@ const EditingContactModal = ({ contact, setEditContact, refetch }: EditingContac
                                     </label>
                                 </div>
                                 {errors.status && (
-                                    <p className="text-red-500">{errors.status?.message}</p>
+                                    <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.status?.message}</p>
                                 )}
                             </div>
                             <div className="text-start mt-2">
-                                <button className="btn btn-accent rounded-none text-white">
+                                <button className="btn btn-accent rounded-none text-white tracking-wider px-5">
                                     Update
                                 </button>
                             </div>

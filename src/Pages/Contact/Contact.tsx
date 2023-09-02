@@ -12,6 +12,9 @@ interface ContactData {
   _id: string;
   firstName: string;
   lastName: string;
+  email: string;
+  phone: number;
+  address: string;
   status: string;
 }
 
@@ -63,16 +66,16 @@ const Contact = () => {
   };
 
   return (
-    <div className='text-center'>
+    <div className='text-center w-3/4 mx-auto my-10'>
       <Link to='/create-contact'>
         <button className="btn btn-neutral rounded-none">Create Contact</button>
       </Link>
       {/* conatct table */}
       {
         contacts.length ?
-          <div className="container mx-auto mt-4">
+          <div className="container mx-auto mt-10 bg-white p-10 shadow-md">
             <h1
-              className="text-3xl text-start text-sky-900 font-bold my-5 ml-3"
+              className="text-3xl text-start text-sky-900 font-bold mb-5 ml-3 noContact"
             >
               All Contacts
             </h1>
@@ -108,19 +111,19 @@ const Contact = () => {
                       <td>{contact.lastName}</td>
                       <td>
                         <button
-                          className={`py-3 badge capitalize ${contact?.status === "active" ? "badge-success" : "badge-error bg-red-600 text-white"}`}
+                          className={`pb-3 pt-2 badge capitalize ${contact?.status === "active" ? "badge-success" : "badge-error text-white"}`}
                         >
                           {contact.status}
                         </button>
                       </td>
                       <td>
                         <label onClick={() => { setEditContact(contact) }}
-                          htmlFor="contactEditModal" className="btn btn-xs bg-accent text-white">Edit
+                          htmlFor="contactEditModal" className="btn btn-xs rounded-none bg-accent text-white">Edit
                         </label>
                       </td>
 
                       <td>
-                        <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn btn-xs bg-red-600 text-white">Delete</label>
+                        <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn btn-xs rounded-none bg-red-600 text-white">Delete</label>
                       </td>
                     </tr>
                   ))}

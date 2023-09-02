@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 interface FormData {
     firstName: string;
     lastName: string;
+    email: string;
+    phone: number;
+    address: string;
     status: string;
 }
 const CcreateContact = () => {
@@ -50,7 +53,7 @@ const CcreateContact = () => {
             })
     }
     return (
-        <div className='text-center'>
+        <div className='text-center w-3/4 mx-auto noContact'>
 
             {/* conatct form */}
             <form onSubmit={handleSubmit(handleContact)} className="card-body ">
@@ -92,6 +95,57 @@ const CcreateContact = () => {
                     )}
                 </div>
 
+                <div className="form-control grid grid-cols-12 my-5">
+                    <label className="label col-span-2">
+                        <span className="label-text font-semibold">Email:</span>
+                    </label>
+                    <input
+                        {...register("email", {
+                            required: "Email is required",
+                        })}
+                        type="email"
+                        placeholder="Email"
+                        className="input input-bordered col-span-10"
+                    />
+                    {errors.email && (
+                        <p className="text-red-500">{errors.email?.message}</p>
+                    )}
+                </div>
+
+                <div className="form-control grid grid-cols-12 my-5">
+                    <label className="label col-span-2">
+                        <span className="label-text font-semibold">Phone Number:</span>
+                    </label>
+                    <input
+                        {...register("phone", {
+                            required: "Phone Number is required",
+                        })}
+                        type="text"
+                        placeholder="Phone Number"
+                        className="input input-bordered col-span-10"
+                    />
+                    {errors.phone && (
+                        <p className="text-red-500">{errors.phone?.message}</p>
+                    )}
+                </div>
+
+                <div className="form-control grid grid-cols-12 my-5">
+                    <label className="label col-span-2">
+                        <span className="label-text font-semibold">Address:</span>
+                    </label>
+                    <input
+                        {...register("address", {
+                            required: "Adress is required",
+                        })}
+                        type="text"
+                        placeholder="Address"
+                        className="input input-bordered col-span-10"
+                    />
+                    {errors.address && (
+                        <p className="text-red-500">{errors.address?.message}</p>
+                    )}
+                </div>
+                
                 <div className="form-control grid grid-cols-12 my-5">
                     <label className="label col-span-2">
                         <span className="label-text font-semibold">Status:</span>
