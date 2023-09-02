@@ -6,7 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "types": ["react", "@types/react"],
+    "types": ["react", "@types/react", ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
