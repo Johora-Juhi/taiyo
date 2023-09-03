@@ -15,7 +15,6 @@ interface FormData {
     status: string;
 }
 
-
 const CcreateContact = () => {
     useTitle('Create Contact');
 
@@ -37,7 +36,7 @@ const CcreateContact = () => {
     const handleContact: SubmitHandler<FormData> = (data) => {
         const conatct = { ...data, status: contactStatus }
 
-        fetch("http://localhost:5000/contact", {
+        fetch("https://taiyo-server-nine.vercel.app/contact", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

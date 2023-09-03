@@ -26,7 +26,7 @@ const Contact = () => {
   const { data: contacts = [], refetch } = useQuery<ContactData[]>({
     queryKey: ["contacts"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/contact`, {
+      const res = await fetch(`https://taiyo-server-nine.vercel.app/contact`, {
         headers: {
         },
       });
@@ -47,7 +47,7 @@ const Contact = () => {
   }
 
   const handleDetetingcontact = (id: string) => {
-    fetch(`http://localhost:5000/contact/${id}`, {
+    fetch(`https://taiyo-server-nine.vercel.app/contact/${id}`, {
       method: "DELETE",
       headers: {
       },
@@ -86,26 +86,26 @@ const Contact = () => {
               All Contacts
             </h1>
             <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>
-            {
-              contacts.map(contact => 
-                <div className="card bg-base-100 shadow-xl border border-green-100">
-              <div className="card-body pb-0 px-0">
-                    <h2 className="text-center font-semibold text-2xl">{contact.firstName} {contact.lastName }</h2>
-                    <div className='flex justify-between items-center my-5 px-5 :px-10'>
-                    <label onClick={() => { setEditContact(contact) }}
+              {
+                contacts.map(contact =>
+                  <div className="card bg-base-100 shadow-xl border border-green-100">
+                    <div className="card-body pb-0 px-0">
+                      <h2 className="text-center font-semibold text-2xl">{contact.firstName} {contact.lastName}</h2>
+                      <div className='flex justify-between items-center my-5 px-5 :px-10'>
+                        <label onClick={() => { setEditContact(contact) }}
                           htmlFor="contactEditModal" className="btn bg-accent text-white px-10 md:px-14">Edit
                         </label>
-                      <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn bg-red-600 text-white px-10 md:px-14">Delete</label>
+                        <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn bg-red-600 text-white px-10 md:px-14">Delete</label>
+                      </div>
+                      <Link state={contact} to='/contact-details'> <p className=' bg-neutral py-3 text-white rounded-b-lg'>
+                        View Details
+                      </p></Link>
+
                     </div>
-                    <Link state={contact} to='/contact-details'> <p className=' bg-neutral py-3 text-white rounded-b-lg'>
-                          View Details
-                        </p></Link>
-              
-              </div>
-            </div>)
-            }
-           </div>
-            
+                  </div>)
+              }
+            </div>
+
             {/* edit contact modal  */}
             {
               editContact &&

@@ -44,7 +44,7 @@ const EditingContactModal = ({ contact, setEditContact, refetch }: EditingContac
     const handleEditContact: SubmitHandler<FormData> = (data) => {
         const updatedContact: Contact = { ...contact, ...data, status: contactStatus };
 
-        fetch(`http://localhost:5000/contact/${contact._id}`, {
+        fetch(`https://taiyo-server-nine.vercel.app/contact/${contact._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,60 +116,60 @@ const EditingContactModal = ({ contact, setEditContact, refetch }: EditingContac
                             </div>
 
                             <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-3">
-                        <span className="label-text font-semibold">Email:</span>
-                    </label>
-                    <input
-                        {...register("email", {
-                            required: "Email is required",
-                        })}
-                        type="email"
-                        placeholder="Email"
+                                <label className="label col-span-3">
+                                    <span className="label-text font-semibold">Email:</span>
+                                </label>
+                                <input
+                                    {...register("email", {
+                                        required: "Email is required",
+                                    })}
+                                    type="email"
+                                    placeholder="Email"
                                     className="input input-bordered col-span-9"
                                     defaultValue={contact.email}
-                    />
-                    {errors.email && (
-                        <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.email?.message}</p>
-                    )}
-                </div>
+                                />
+                                {errors.email && (
+                                    <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.email?.message}</p>
+                                )}
+                            </div>
 
-                <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-3">
-                        <span className="label-text font-semibold">Phone Number:</span>
-                    </label>
-                    <input
-                        {...register("phone", {
-                            required: "Phone Number is required",
-                        })}
-                        type="text"
-                        placeholder="Phone Number"
+                            <div className="form-control grid grid-cols-12 my-5">
+                                <label className="label col-span-3">
+                                    <span className="label-text font-semibold">Phone Number:</span>
+                                </label>
+                                <input
+                                    {...register("phone", {
+                                        required: "Phone Number is required",
+                                    })}
+                                    type="text"
+                                    placeholder="Phone Number"
                                     className="input input-bordered col-span-9"
                                     defaultValue={contact.phone}
 
-                    />
-                    {errors.phone && (
-                        <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.phone?.message}</p>
-                    )}
-                </div>
+                                />
+                                {errors.phone && (
+                                    <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.phone?.message}</p>
+                                )}
+                            </div>
 
-                <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-3">
-                        <span className="label-text font-semibold">Address:</span>
-                    </label>
-                    <input
-                        {...register("address", {
-                            required: "Adress is required",
-                        })}
-                        type="text"
-                        placeholder="Address"
+                            <div className="form-control grid grid-cols-12 my-5">
+                                <label className="label col-span-3">
+                                    <span className="label-text font-semibold">Address:</span>
+                                </label>
+                                <input
+                                    {...register("address", {
+                                        required: "Adress is required",
+                                    })}
+                                    type="text"
+                                    placeholder="Address"
                                     className="input input-bordered col-span-9"
                                     defaultValue={contact.address}
 
-                    />
-                    {errors.address && (
-                        <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.address?.message}</p>
-                    )}
-                </div>
+                                />
+                                {errors.address && (
+                                    <p className="text-red-500 col-span-12 pl-[10.50rem] pt-4 text-left">{errors.address?.message}</p>
+                                )}
+                            </div>
                             <div className="form-control grid grid-cols-12 my-5">
                                 <label className="label col-span-3">
                                     <span className="label-text font-semibold">Status:</span>
