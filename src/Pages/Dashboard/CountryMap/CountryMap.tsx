@@ -31,7 +31,7 @@ const CountryMap= () => {
     }
 
     return (
-        <div className='w-3/4 mx-auto shadow-xl px-10 bg-white my-10 pb-10'>
+        <div className='w-full lg:w-3/4 mx-auto shadow-xl px-2 md:px-10 bg-white  my-10 pb-2 md:pb-10'>
             <p className='pt-5 pb-10 text-xl fontFamily tracking-wider'>COVID-19 Map</p>
             <MapContainer center={[0,0]} zoom={2} style={{ height: '400px', width: '100%' }}>
                 <TileLayer

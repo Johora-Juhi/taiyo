@@ -3,6 +3,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from 'react'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
+
 
 interface FormData {
     firstName: string;
@@ -12,7 +14,11 @@ interface FormData {
     address: string;
     status: string;
 }
+
+
 const CcreateContact = () => {
+    useTitle('Create Contact');
+
     const navigate = useNavigate();
 
     const [contactStatus, setContactStatus] = useState('active');
@@ -30,7 +36,7 @@ const CcreateContact = () => {
     }
     const handleContact: SubmitHandler<FormData> = (data) => {
         const conatct = { ...data, status: contactStatus }
-        
+
         fetch("http://localhost:5000/contact", {
             method: "POST",
             headers: {
@@ -39,7 +45,7 @@ const CcreateContact = () => {
             body: JSON.stringify(conatct),
         })
             .then((res) => res.json())
-            .then((data) => {
+            .then(() => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -53,7 +59,7 @@ const CcreateContact = () => {
             })
     }
     return (
-        <div className='text-center w-3/4 mx-auto noContact'>
+        <div className='text-center w-full md:w-3/4 mx-auto noContact'>
 
             {/* conatct form */}
             <form onSubmit={handleSubmit(handleContact)} className="card-body ">
@@ -62,7 +68,7 @@ const CcreateContact = () => {
                 </h1>
 
                 <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-2">
+                    <label className="label col-span-3 md:col-span-2">
                         <span className="label-text font-semibold">First Name:</span>
                     </label>
                     <input
@@ -71,15 +77,15 @@ const CcreateContact = () => {
                         })}
                         type="text"
                         placeholder="First Name"
-                        className="input input-bordered col-span-10"
+                        className="input input-bordered col-span-9 md:col-span-10"
                     />
                     {errors.firstName && (
-                        <p className="text-red-500">{errors.firstName?.message}</p>
+                        <p className="text-red-500 col-span-12 mt-2">{errors.firstName?.message}</p>
                     )}
                 </div>
 
                 <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-2">
+                    <label className="label col-span-3 md:col-span-2">
                         <span className="label-text font-semibold">Last Name:</span>
                     </label>
                     <input
@@ -88,15 +94,15 @@ const CcreateContact = () => {
                         })}
                         type="text"
                         placeholder="Last Name"
-                        className="input input-bordered col-span-10"
+                        className="input input-bordered col-span-9 md:col-span-10"
                     />
                     {errors.lastName && (
-                        <p className="text-red-500">{errors.lastName?.message}</p>
+                        <p className="text-red-500 col-span-12 mt-2">{errors.lastName?.message}</p>
                     )}
                 </div>
 
                 <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-2">
+                    <label className="label col-span-3 md:col-span-2">
                         <span className="label-text font-semibold">Email:</span>
                     </label>
                     <input
@@ -105,15 +111,15 @@ const CcreateContact = () => {
                         })}
                         type="email"
                         placeholder="Email"
-                        className="input input-bordered col-span-10"
+                        className="input input-bordered col-span-9 md:col-span-10"
                     />
                     {errors.email && (
-                        <p className="text-red-500">{errors.email?.message}</p>
+                        <p className="text-red-500 col-span-12 mt-2">{errors.email?.message}</p>
                     )}
                 </div>
 
                 <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-2">
+                    <label className="label col-span-3 md:col-span-2">
                         <span className="label-text font-semibold">Phone Number:</span>
                     </label>
                     <input
@@ -122,15 +128,15 @@ const CcreateContact = () => {
                         })}
                         type="text"
                         placeholder="Phone Number"
-                        className="input input-bordered col-span-10"
+                        className="input input-bordered col-span-9 md:col-span-10"
                     />
                     {errors.phone && (
-                        <p className="text-red-500">{errors.phone?.message}</p>
+                        <p className="text-red-500 col-span-12 mt-2">{errors.phone?.message}</p>
                     )}
                 </div>
 
                 <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-2">
+                    <label className="label col-span-3 md:col-span-2">
                         <span className="label-text font-semibold">Address:</span>
                     </label>
                     <input
@@ -139,15 +145,15 @@ const CcreateContact = () => {
                         })}
                         type="text"
                         placeholder="Address"
-                        className="input input-bordered col-span-10"
+                        className="input input-bordered col-span-9 md:col-span-10"
                     />
                     {errors.address && (
-                        <p className="text-red-500">{errors.address?.message}</p>
+                        <p className="text-red-500 col-span-12 mt-2">{errors.address?.message}</p>
                     )}
                 </div>
-                
+
                 <div className="form-control grid grid-cols-12 my-5">
-                    <label className="label col-span-2">
+                    <label className="label col-span-3 md:col-span-2">
                         <span className="label-text font-semibold">Status:</span>
                     </label>
                     <div className='col-span-1 flex flex-col gap-4'>
@@ -159,7 +165,7 @@ const CcreateContact = () => {
                         </label>
                     </div>
                     {errors.status && (
-                        <p className="text-red-500">{errors.status?.message}</p>
+                        <p className="text-red-500 col-span-12 mt-2">{errors.status?.message}</p>
                     )}
                 </div>
                 <div className="text-start mt-2">

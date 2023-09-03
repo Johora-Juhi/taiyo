@@ -4,8 +4,8 @@ interface ConfirmationModalProps {
     title: string;
     message: string;
     successButtonName: string;
-    successAction:  (id: any) => void; // Adjust the type of modalData as needed
-    modalData: any; // Adjust the type as needed
+    successAction:  (id: any) => void; 
+    modalData: any; 
     closeModal: () => void;
   }
 const ConfirmationModal = ({title,message,successButtonName,successAction,modalData,closeModal}: ConfirmationModalProps) => {

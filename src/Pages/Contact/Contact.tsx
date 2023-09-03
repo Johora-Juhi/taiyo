@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import ConfirmationModal from '../Shared/ConfirmationModal';
 import EditingContactModal from '../EditingContactModal/EditingContactModal';
 import { TiDelete } from "react-icons/ti";
+import useTitle from '../../hooks/useTitle';
 
 
 interface ContactData {
@@ -19,6 +20,7 @@ interface ContactData {
 }
 
 const Contact = () => {
+  useTitle('Contacts');
 
   // get all contacts 
   const { data: contacts = [], refetch } = useQuery<ContactData[]>({
@@ -66,70 +68,45 @@ const Contact = () => {
   };
 
   return (
-    <div className='text-center w-3/4 mx-auto my-10'>
+    <div className='text-center w-full lg:w-3/4 mx-auto my-10'>
       <Link to='/create-contact'>
-        <button className="btn btn-neutral rounded-none">Create Contact</button>
+        <button className="btn btn-accent text-white rounded-none">Create Contact</button>
       </Link>
-      {/* conatct table */}
+
+      {/* contact table or no contact  */}
       {
         contacts.length ?
-          <div className="container mx-auto mt-10 bg-white p-10 shadow-md">
+
+          //  conatct table 
+          <div className="mx-auto mt-10 p-10">
+
             <h1
               className="text-3xl text-start text-sky-900 font-bold mb-5 ml-3 noContact"
             >
               All Contacts
             </h1>
-            <div className="table-responsive">
-              <table className="table table-striped border rounded">
-                <thead>
-                  <tr>
-                    <th className="text-dark" scope="col">
-                      #
-                    </th>
-                    <th className="text-dark" scope="col">
-                      First Name
-                    </th>
-                    <th className="text-dark" scope="col">
-                      Last Name
-                    </th>
-                    <th className="text-dark" scope="col">
-                      Details
-                    </th>
-                    <th className="text-dark" scope="col">
-                      Edit
-                    </th>
-                    <th className="text-dark" scope="col">
-                      Delete
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contacts.map((contact, i) => (
-                    <tr key={contact._id}>
-                      <th scope="row">{i + 1}</th>
-                      <td>{contact.firstName}</td>
-                      <td>{contact.lastName}</td>
-                     
-                      <td>
-                       <Link state={contact} to='/contact-details'> <button className='btn btn-neutral btn-xs rounded-none'>
-                          View Details
-                        </button></Link>
-                      </td>
-                      <td>
-                        <label onClick={() => { setEditContact(contact) }}
-                          htmlFor="contactEditModal" className="btn btn-xs rounded-none bg-accent text-white">Edit
+            <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>
+            {
+              contacts.map(contact => 
+                <div className="card bg-base-100 shadow-xl border border-green-100">
+              <div className="card-body pb-0 px-0">
+                    <h2 className="text-center font-semibold text-2xl">{contact.firstName} {contact.lastName }</h2>
+                    <div className='flex justify-between items-center my-5 px-5 :px-10'>
+                    <label onClick={() => { setEditContact(contact) }}
+                          htmlFor="contactEditModal" className="btn bg-accent text-white px-10 md:px-14">Edit
                         </label>
-                      </td>
-
-                      <td>
-                        <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn btn-xs rounded-none bg-red-600 text-white">Delete</label>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-
-              </table>
-            </div>
+                      <label onClick={() => setDeletingSeller(contact)} htmlFor="confirmation-modal" className="btn bg-red-600 text-white px-10 md:px-14">Delete</label>
+                    </div>
+                    <Link state={contact} to='/contact-details'> <p className=' bg-neutral py-3 text-white rounded-b-lg'>
+                          View Details
+                        </p></Link>
+              
+              </div>
+            </div>)
+            }
+           </div>
+            
+            {/* edit contact modal  */}
             {
               editContact &&
               (
@@ -140,6 +117,8 @@ const Contact = () => {
                 ></EditingContactModal>
               )
             }
+
+            {/* before deleting contact confirmation modal  */}
             {
               deletingSeller && <ConfirmationModal
                 title={'Are you sure you want to delete'}
@@ -151,16 +130,16 @@ const Contact = () => {
               ></ConfirmationModal>
             }
           </div>
-          :
-          <div className='w-2/4 mx-auto bg-gray-50 text-center my-20 py-10 flex justify-around items-center rounded-md border-2 border-dashed'>
-            <TiDelete className='text-5xl text-red-600'></TiDelete>
-            <p className='text-xl noContact'>No contact found. Please add from create account</p>
 
+          :
+          <div className='w-full md:w-3/4 lg:w-2/4 mx-auto bg-gray-50 text-center my-20 py-10 px-10 flex justify-around items-center rounded-md border-2 border-dashed'>
+            <TiDelete className='text-5xl text-red-600'></TiDelete>
+            <p className='text-base md:text-xl noContact'>No contact found. Please add from create account</p>
           </div>
       }
 
 
-    </div>
+    </div >
   );
 };
 

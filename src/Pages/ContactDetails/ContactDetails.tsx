@@ -1,7 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const ContactDetails = () => {
+    useTitle('Contact Details');
+
     const location = useLocation();
     const contact = location.state;
     console.log(contact);

@@ -40,9 +40,26 @@ const LineGraph = () => {
   }));
 
   return (
-    <div className='flex flex-col justify-center items-center shadow-lg w-3/4 mx-auto my-10 bg-white'>
+    <div className='flex flex-col justify-center items-center shadow-lg w-full lg:w-3/4 mx-auto my-10 bg-white'>
       <p className='pt-5 pb-14 text-xl fontFamily tracking-wider'>COVID-19 Cases, Deaths, and Recovered</p>
-      <LineChart width={800} height={500} data={chartData}   margin={{
+      {window.innerWidth < 600 ? (
+        <LineChart width={360} height={400} data={chartData} margin={{
+          top: 5,
+          right: 5,
+          left: 50,
+          bottom: 5,
+        }}>
+          <XAxis dataKey="date" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="cases" stroke="rgba(75, 192, 192, 1)" />
+          <Line type="monotone" dataKey="deaths" stroke="rgba(255, 0, 0, 1)" />
+          <Line type="monotone" dataKey="recovered" stroke="rgba(0, 128, 0, 1)" />
+        </LineChart>
+      ) :(
+      <LineChart width={800} height={500} data={chartData} margin={{
             top: 5,
             right: 30,
             left: 50,
@@ -52,11 +69,12 @@ const LineGraph = () => {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        <Legend className='py-5' />
+        <Legend />
         <Line type="monotone" dataKey="cases" stroke="rgba(75, 192, 192, 1)" />
         <Line type="monotone" dataKey="deaths" stroke="rgba(255, 0, 0, 1)" />
         <Line type="monotone" dataKey="recovered" stroke="rgba(0, 128, 0, 1)" />
-      </LineChart>
+        </LineChart>
+  )}
     </div>
   );
 };
